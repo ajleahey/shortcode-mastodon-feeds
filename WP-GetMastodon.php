@@ -1,7 +1,15 @@
 <?php
 /*
-Plugin Name: Mastodon Post Display
-Description: Display your Mastodon posts on a WordPress page
+ * Plugin Name: Mastodon Post Display
+ * Plugin URI: 
+ * Description: Display your Mastodon posts on a WordPress page
+ * Version: 0.0.0
+ * Author: Andrew Leahey
+ * Author URI: http://andrew.legal
+ * License: 
+ * License URI: 
+ * Text Domain: wp-mastodonposts
+ * GitHub Plugin URI: https://github.com/ajleahey/wp-mastodonposts
 */
 
 function mastodon_post_display_shortcode() {
