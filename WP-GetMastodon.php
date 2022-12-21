@@ -55,9 +55,16 @@ function mastodonshortcode_get_posts() {
     $items = $feed->get_items(0, $limit); // create an array of items
   }
 
+  echo '<ul class="toots">';
   foreach ($items as $item) {
-    echo '<li><a href="' . esc_url($item->get_permalink()) . '" title="' . esc_html($item->get_date('j F Y @ g:i a')) . '">' . esc_html($item->get_title()) . '</a><br>' . esc_html($item->get_description()) . '</li>';
+    echo '<li class="toot-item">
+      <span class="toot-date"><a href="' . esc_url($item->get_permalink()) . '" title="' . esc_html($item->get_date('j F Y @ g:i a')) . '">' . 
+      /* ($item->get_title())  -- Mastodon RSS has no titles */ 
+      esc_html($item->get_date('j F Y @ g:i a')) . '</a></span>' .
+      '<span class="toot-body">'. 
+      esc_attr( strip_tags($item->get_description())) . '</span></li>';
   }
+  echo '</ul>';
 
   /*
   // Initialize an empty array to store the posts
