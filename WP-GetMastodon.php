@@ -55,36 +55,23 @@ function mastodonshortcode_get_posts() {
     $items = $feed->get_items(0, $limit); // create an array of items
   }
 
-  echo '<ul class="toots">';
-  foreach ($items as $item) {
-    echo '<li class="toot-item">
-      <span class="toot-date"><a href="' . esc_url($item->get_permalink()) . '" title="' . esc_html($item->get_date('j F Y @ g:i a')) . '">' . 
-      /* ($item->get_title())  -- Mastodon RSS has no titles */ 
-      esc_html($item->get_date('j F Y @ g:i a')) . '</a></span>' .
-      '<span class="toot-body">'. 
-      esc_attr( strip_tags($item->get_description())) . '</span></li>';
-  }
-  echo '</ul>';
-
-  /*
   // Initialize an empty array to store the posts
   $posts = [];
 
   // Loop through the items in the RSS feed
   foreach ($items as $item) {
     // Add the post to the array
+    $content = strip_tags($item->get_description());
     $posts[] = [
       //'title' => (string) $item->title,
-      'content' => $item->description,
-      'pub_date' => $item->pubDate,
-      'link' => $item->link
+      'content' => esc_attr( preg_replace("/http/", " http", $content)), //make_clickable() can be used to make in-text URLs clickable
+      'pub_date' => esc_html($item->get_date('j F Y @ g:i a')),
+      'link' => esc_url($item->get_permalink())
     ];
   }
 
   // Return the array of posts
-  
   return $posts;
-  */
 }
 
 function mastodonshortcode_display() {
@@ -104,13 +91,13 @@ function mastodonshortcode_display() {
     $html .= '<div class="mastodon-post">';
 
     // Add the post title in bold
-    $html .= '<h3><strong>' . $post['title'] . '</strong></h3>';
+    //$html .= '<h3><strong>' . $post['title'] . '</strong></h3>';
 
     // Add the post content
     $html .= '<p>' . $post['content'] . '</p>';
 
     // Add the post publication date
-    $html .= '<p><em>' . $post['pub_date'] . '</em></p>';
+    $html .= '<p><em><a href=' . $post['link'] . '>' . $post['pub_date'] . '</a></em></p>';
 
     $html .= '</div>';
   }
