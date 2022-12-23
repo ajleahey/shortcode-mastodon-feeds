@@ -12,8 +12,6 @@
  * GitHub Plugin URI: https://github.com/ajleahey/wp-mastodonposts
 */
 
-// WP plugin standard requires unique prefix to all functions. Suggesting "mastodonshortcode_"
-
 // Checks if our functions exist and creates them if not.
 if ( ! function_exists( 'mastodonshortcode_init' ) || ! function_exists( 'mastodonshortcode_display') || ! function_exists( 'mastodonshortcode_get_posts') || ! function_exists('mastodonshortcode_settings_field' ) ) {
 
@@ -24,7 +22,7 @@ if ( ! function_exists( 'mastodonshortcode_init' ) || ! function_exists( 'mastod
   }
   add_filter('admin_init', 'mastodonshortcode_init');
 
-  //Exits name collision is found.
+  // Exits name collision is found.
 } else {
   exit("mastodonshortcode functions already exist");
 }
@@ -35,7 +33,8 @@ function mastodonshortcode_settings_field() {
   // input validation $pattern should accept any valid URL up to two sub-domains (https://subsubsub.subsub.sub.domain.tld/@user).
   $pattern = 'http(s?)(:\/\/)(([a-zA-z0-9\-_]+(\.))?)(([a-zA-z0-9\-_]+(\.))?)(([a-zA-z0-9\-_]+(\.))?)([a-zA-z0-9\-_]+)(\.)([a-zA-z0-9\-_]+)(\/)(@)([a-zA-z0-9\-_.]+)';
   // defines input field
-  echo '<input type="url" id="mastodonshortcode_url" name="mastodonshortcode_url" value="' . esc_url($value) . '" pattern="'. esc_attr($pattern) .'" title="Mastodon profile URL must be in the form of https://domain.tld/@user" placeholder="https://mastodon.social/@user" style="width:30em;"/>';
+  echo '<input type="url" id="mastodonshortcode_url" name="mastodonshortcode_url" value="' . esc_url($value) . '" pattern="'. esc_attr($pattern) 
+    .'" title="Mastodon profile URL must be in the form of https://domain.tld/@user" placeholder="https://mastodon.social/@user" style="width:30em;"/>';
 }
 
 function mastodonshortcode_get_posts() {
@@ -49,10 +48,10 @@ function mastodonshortcode_get_posts() {
   }
   // Fetch the RSS feed content
   if(function_exists('fetch_feed')) {
-    include_once(ABSPATH . WPINC . '/feed.php');  // include the required file
-    $feed = fetch_feed($rss); // specify the source feed
-    $limit = $feed->get_item_quantity(7); // specify number of items
-    $items = $feed->get_items(0, $limit); // create an array of items
+    include_once(ABSPATH . WPINC . '/feed.php');   // include the required file
+    $feed = fetch_feed($rss);                      // specify the source feed
+    $limit = $feed->get_item_quantity(7);          // specify number of items
+    $items = $feed->get_items(0, $limit);          // create an array of items
   }
 
   // Initialize an empty array to store the posts
@@ -61,10 +60,15 @@ function mastodonshortcode_get_posts() {
   // Loop through the items in the RSS feed
   foreach ($items as $item) {
     // Add the post to the array
-    $content = strip_tags($item->get_description());
+    $content = strip_tags($item->get_description());                                // sanitize input
+    $content = esc_attr(preg_replace( "/http/", " http", $content ));               // add space before URLs concatenated with preceeding text by strip_tags()
+    $url_pattern = '/(http|https)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/';   // regex matching URLs
+    $content= preg_replace($url_pattern, '<a href="$0">$0</a>', $content);          // replace URL with link
+
     $posts[] = [
-      //'title' => (string) $item->title,
-      'content' => esc_attr( preg_replace("/http/", " http", $content)), //make_clickable() can be used to make in-text URLs clickable
+      // Mastodon RSS feeds have no title
+      // 'title' => (string) $item->title,
+      'content' => $content, 
       'pub_date' => esc_html($item->get_date('j F Y @ g:i a')),
       'link' => esc_url($item->get_permalink())
     ];
@@ -91,7 +95,7 @@ function mastodonshortcode_display() {
     $html .= '<div class="mastodon-post">';
 
     // Add the post title in bold
-    //$html .= '<h3><strong>' . $post['title'] . '</strong></h3>';
+    // $html .= '<h3><strong>' . $post['title'] . '</strong></h3>';
 
     // Add the post content
     $html .= '<p>' . $post['content'] . '</p>';
