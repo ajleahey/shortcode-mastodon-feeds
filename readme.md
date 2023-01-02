@@ -25,6 +25,6 @@ This is a pre-release version of the plugin. There *will* be breaking changes in
 
 ## Changelog ##
 
-Project maintained on GitHub at [https://github.com/ajleahey/wp-mastodonposts](https://github.com/ajleahey/wp-mastodonposts)
+Project maintained on GitHub at [github.com/ajleahey/shortcode-mastodon-feeds](https://github.com/ajleahey/shortcode-mastodon-feeds)
 
 ### Pre-release ###
