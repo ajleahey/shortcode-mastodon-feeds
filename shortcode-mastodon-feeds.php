@@ -1,64 +1,64 @@
 <?php
 /*
- * Plugin Name: Mastodon Post Display
+ * Plugin Name: Shortcode Mastodon Feeds
  * Plugin URI: 
  * Description: Display your Mastodon posts on a WordPress page
  * Version: 0.0.0
- * Author: Andrew Leahey
- * Author URI: http://andrew.legal
- * License: 
- * License URI: 
- * Text Domain: wp-mastodonposts
- * GitHub Plugin URI: https://github.com/ajleahey/wp-mastodonposts
+ * Author: Andrew Leahey, Jay McKinnon
+ * Author URI: https://github.com/ajleahey/shortcode-mastodon-feeds
+ * License: GPL-2.0+
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
+ * Text Domain: shortcode-mastodon-feeds
+ * GitHub Plugin URI: https://github.com/ajleahey/shortcode-mastodon-feeds
 */
 
 // Checks if our functions exist and creates them if not.
-if ( ! function_exists( 'mastodonshortcode_init' ) ||
-     ! function_exists( 'mastodonshortcode_display') ||
-     ! function_exists( 'mastodonshortcode_get_posts') ||
-     ! function_exists( 'mastodonshortcode_settings_field' ) ||
-     ! function_exists( 'mastodonshortcode_settings_count' ) 
+if ( ! function_exists( 'shortcodemastodonfeeds_init' ) ||
+     ! function_exists( 'shortcodemastodonfeeds_display') ||
+     ! function_exists( 'shortcodemastodonfeeds_get_posts') ||
+     ! function_exists( 'shortcodemastodonfeeds_settings_field' ) ||
+     ! function_exists( 'shortcodemastodonfeeds_settings_count' ) 
   ) {
 
   // registers a field in General Settings to define the RSS URL
-  function mastodonshortcode_init() {
-      register_setting( 'general', 'mastodonshortcode_url' );
-      register_setting( 'general', 'mastodonshortcode_count' );
-      add_settings_field('mastodonshortcode_url', '<label for="mastodonshortcode_url">'.__('URL for Mastodon shortcode' , 'mastodonshortcode_url' ).'</label>' , 'mastodonshortcode_settings_url', 'general');
-      add_settings_field('mastodonshortcode_count', '<label for="mastodonshortcode_count">'.__('How many posts displayed by Mastodon shortcode' , 'mastodonshortcode_count' ).'</label>' , 'mastodonshortcode_settings_count', 'general');
+  function shortcodemastodonfeeds_init() {
+      register_setting( 'general', 'shortcodemastodonfeeds_url' );
+      register_setting( 'general', 'shortcodemastodonfeeds_count' );
+      add_settings_field('shortcodemastodonfeeds_url', '<label for="shortcodemastodonfeeds_url">'.__('URL for Shortcode Mastodon Feeds' , 'shortcodemastodonfeeds_url' ).'</label>' , 'shortcodemastodonfeeds_settings_url', 'general');
+      add_settings_field('shortcodemastodonfeeds_count', '<label for="shortcodemastodonfeeds_count">'.__('How many posts displayed by Shortcode Mastodon Feeds' , 'shortcodemastodonfeeds_count' ).'</label>' , 'shortcodemastodonfeeds_settings_count', 'general');
   }
-  add_filter('admin_init', 'mastodonshortcode_init');
+  add_filter('admin_init', 'shortcodemastodonfeeds_init');
 
   // Exits name collision is found.
 } else {
-  exit('mastodonshortcode function(s) already exist');
+  exit('shortcodemastodonfeeds function(s) already exist');
 }
 
 // Set up the URL Settings field
-function mastodonshortcode_settings_url() {
-  $value = get_option( 'mastodonshortcode_url', '' );
+function shortcodemastodonfeeds_settings_url() {
+  $value = get_option( 'shortcodemastodonfeeds_url', '' );
   // input validation $pattern should accept any valid URL up to two sub-domains (https://subsubsub.subsub.sub.domain.tld/@user).
   $pattern = 'http(s?)(:\/\/)(([a-zA-z0-9\-_]+(\.))?)(([a-zA-z0-9\-_]+(\.))?)(([a-zA-z0-9\-_]+(\.))?)([a-zA-z0-9\-_]+)(\.)([a-zA-z0-9\-_]+)(\/)(@)([a-zA-z0-9\-_.]+)';
   // defines input field
-  echo '<input type="url" id="mastodonshortcode_url" name="mastodonshortcode_url" value="' . sanitize_url($value) . '" pattern="'. esc_attr($pattern) 
+  echo '<input type="url" id="shortcodemastodonfeeds_url" name="shortcodemastodonfeeds_url" value="' . sanitize_url($value) . '" pattern="'. esc_attr($pattern) 
     .'" title="Mastodon profile URL must be in the form of https://domain.tld/@user" placeholder="https://mastodon.social/@user" style="width:30em;"/>';
 }
 
 // Set up the post count Settings field
-function mastodonshortcode_settings_count() {
-  $value = get_option( 'mastodonshortcode_count', '' );
+function shortcodemastodonfeeds_settings_count() {
+  $value = get_option( 'shortcodemastodonfeeds_count', '' );
   // input validation $pattern should accept any valid URL up to two sub-domains (https://subsubsub.subsub.sub.domain.tld/@user).
   $pattern = '[0-9]';
   // defines input field
-  echo '<input type="url" id="mastodonshortcode_count" name="mastodonshortcode_count" value="' . sanitize_text_field(absint($value)) . '" pattern="'. esc_attr($pattern) 
+  echo '<input type="url" id="shortcodemastodonfeeds_count" name="shortcodemastodonfeeds_count" value="' . sanitize_text_field(absint($value)) . '" pattern="'. esc_attr($pattern) 
     .'" title="Mastodon profile URL must be in the form of https://domain.tld/@user" placeholder="https://mastodon.social/@user" style="width:30em;"/>';
 }
 
 
-function mastodonshortcode_get_posts() {
+function shortcodemastodonfeeds_get_posts() {
   // Define the RSS feed
   if ( ! empty( 'smverification_site_url' ) ) {
-    $url = get_option( 'mastodonshortcode_url','' );
+    $url = get_option( 'shortcodemastodonfeeds_url','' );
     $extension = '.rss';
     $rss = $url . $extension;
     $rss = preg_replace( "/.rss.rss/", ".rss", $rss );
@@ -67,8 +67,11 @@ function mastodonshortcode_get_posts() {
   }
 
   // get the user-defined number of posts, defaults to 10.
-  if ( ! empty( 'mastodonshortcode_count' ) ) {
-    $count = get_option( 'mastodonshortcode_count','' );
+  if ( ! empty( 'shortcodemastodonfeeds_count' ) ) {
+    $count = get_option( 'shortcodemastodonfeeds_count','' );
+    if ($count > 0) {
+      $count = $count;
+    }
   } else {
     $count = '10';
   }
@@ -81,7 +84,7 @@ function mastodonshortcode_get_posts() {
   // Fetch the RSS feed content
   if(function_exists('fetch_feed')) {
     include_once(ABSPATH . WPINC . '/feed.php');          // include the required file
-    $feed_safe = wp_kses(fetch_feed($rss), $allowedtags); // fetch and sanitize RSS feed
+    $feed_safe = fetch_feed($rss);                        // fetch feed, sanitized by core's WP_SimplePie_Sanitize_KSES
     $limit = $feed_safe->get_item_quantity($count);       // specify number of items
     $items = $feed_safe->get_items(0, $limit);            // create an array of items
   }
@@ -112,9 +115,9 @@ function mastodonshortcode_get_posts() {
   return $posts;
 }
 
-function mastodonshortcode_display() {
+function shortcodemastodonfeeds_display() {
   // Get your Mastodon posts
-  $posts = mastodonshortcode_get_posts();
+  $posts = shortcodemastodonfeeds_get_posts();
 
   // Check if there are any posts to display
   if (empty($posts)) {
@@ -146,4 +149,4 @@ function mastodonshortcode_display() {
   // Return the final HTML
   return $html;
 }
-add_shortcode('mastodon-post-display', 'mastodonshortcode_display');
+add_shortcode('shortcode-mastodon-feeds', 'shortcodemastodonfeeds_display');
