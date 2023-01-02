@@ -9,12 +9,12 @@
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.txt  
 
 ## Description ##
-Display your Mastodon posts on a WordPress page. To use this plugin, simply add the [mastodon-post-display] shortcode to any WordPress page where you want to display your Mastodon posts.
+Display your Mastodon posts on a WordPress page. To use this plugin, simply add the `[shortcode-mastodon-feeds]` shortcode to any WordPress page where you want to display your Mastodon posts.
 
 ## Installation ##
 Upload to your Plugins directory and Activate. Two options will be added to the bottom of Admin's General Settings, one to enter a Mastodon profile URL and the other to declare how many posts should be pulled from the feed.
 
-Use short-code `[mastodon-post-display]` to insert the feed anywhere in your site.
+Use short-code `[shortcode-mastodon-feeds]` to insert the feed anywhere in your site.
 
 ## Warning ##
 This is a pre-release version of the plugin. There *will* be breaking changes in Version 1.0.0. Use Github's Watch > Custom menu to be notified of stable releases.
