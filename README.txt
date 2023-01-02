@@ -1,4 +1,4 @@
-=== Mastodon Post Display ===
+=== Shortcode Mastodon Feeds ===
 Contributors: ajleahey, opendna
 Tags: Mastodon, shortcode
 Requires at least: 6.1
