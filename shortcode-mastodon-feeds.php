@@ -1,14 +1,14 @@
 <?php
 /*
- * Plugin Name: Mastodon Post Display
+ * Plugin Name: Shortcode Mastodon Feeds
  * Plugin URI: 
  * Description: Display your Mastodon posts on a WordPress page
  * Version: 0.0.0
- * Author: Andrew Leahey
- * Author URI: http://andrew.legal
- * License: 
- * License URI: 
- * Text Domain: wp-mastodonposts
+ * Author: Andrew Leahey, Jay McKinnon
+ * Author URI: https://andrew.legal, https://opendna.com
+ * License: GPL-2.0+
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
+ * Text Domain: shortcode-mastodon-feeds
  * GitHub Plugin URI: https://github.com/ajleahey/wp-mastodonposts
 */
 

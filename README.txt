@@ -1,12 +1,12 @@
 === Mastodon Post Display ===
-Contributors:  ajleahey
+Contributors: ajleahey, opendna
 Tags: Mastodon, shortcode
 Requires at least: 6.1
 Tested up to: 6.1.1
 Requires PHP: 7.4
 Stable tag: 0.0.0
-License:  
-License URI:  
+License: GPL-2.0+
+License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
 Display your Mastodon posts on a WordPress page.
 
