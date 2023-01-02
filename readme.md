@@ -1,5 +1,5 @@
 # Mastodon Post Display #
-**Contributors:** [ajleahey](http://andrew.legal), [opendna](https://opendna.com)
+**Contributors:** [ajleahey](http://andrew.legal), [opendna](https://opendna.com) 
 **Tags:** wordpress, plugin, fediverse, activitypub, mastodon 
 **Requires at least:** 6.1 
 **Tested up to:** 6.1.1 
