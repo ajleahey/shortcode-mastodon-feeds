@@ -5,7 +5,7 @@
  * Description: Display your Mastodon posts on a WordPress page
  * Version: 0.0.0
  * Author: Andrew Leahey, Jay McKinnon
- * Author URI: https://andrew.legal, https://opendna.com
+ * Author URI: https://github.com/ajleahey/wp-mastodonposts
  * License: GPL-2.0+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain: shortcode-mastodon-feeds
@@ -24,8 +24,8 @@ if ( ! function_exists( 'mastodonshortcode_init' ) ||
   function mastodonshortcode_init() {
       register_setting( 'general', 'mastodonshortcode_url' );
       register_setting( 'general', 'mastodonshortcode_count' );
-      add_settings_field('mastodonshortcode_url', '<label for="mastodonshortcode_url">'.__('URL for Mastodon shortcode' , 'mastodonshortcode_url' ).'</label>' , 'mastodonshortcode_settings_url', 'general');
-      add_settings_field('mastodonshortcode_count', '<label for="mastodonshortcode_count">'.__('How many posts displayed by Mastodon shortcode' , 'mastodonshortcode_count' ).'</label>' , 'mastodonshortcode_settings_count', 'general');
+      add_settings_field('mastodonshortcode_url', '<label for="mastodonshortcode_url">'.__('URL for Shortcode Mastodon Feeds' , 'mastodonshortcode_url' ).'</label>' , 'mastodonshortcode_settings_url', 'general');
+      add_settings_field('mastodonshortcode_count', '<label for="mastodonshortcode_count">'.__('How many posts displayed by Shortcode Mastodon Feeds' , 'mastodonshortcode_count' ).'</label>' , 'mastodonshortcode_settings_count', 'general');
   }
   add_filter('admin_init', 'mastodonshortcode_init');
 
