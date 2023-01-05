@@ -28,6 +28,7 @@ if ( ! function_exists( 'shortcodemastodonfeeds_init' ) ||
       add_settings_field('shortcodemastodonfeeds_count', '<label for="shortcodemastodonfeeds_count">'.__('How many posts displayed by Shortcode Mastodon Feeds' , 'shortcodemastodonfeeds_count' ).'</label>' , 'shortcodemastodonfeeds_settings_count', 'general');
   }
   add_filter('admin_init', 'shortcodemastodonfeeds_init');
+  shortcodemastodonfeeds_plugin_page();
 
   // Exits name collision is found.
 } else {
@@ -40,7 +41,7 @@ function shortcodemastodonfeeds_settings_url() {
   // input validation $pattern should accept any valid URL up to two sub-domains (https://subsubsub.subsub.sub.domain.tld/@user).
   $pattern = 'http(s?)(:\/\/)(([a-zA-z0-9\-_]+(\.))?)(([a-zA-z0-9\-_]+(\.))?)(([a-zA-z0-9\-_]+(\.))?)([a-zA-z0-9\-_]+)(\.)([a-zA-z0-9\-_]+)(\/)(@)([a-zA-z0-9\-_.]+)';
   // defines input field
-  echo '<input type="url" id="shortcodemastodonfeeds_url" name="shortcodemastodonfeeds_url" value="' . sanitize_url($value) . '" pattern="'. esc_attr($pattern) 
+  echo '<a name="shortcodemastodonfeeds"></a><input type="url" id="shortcodemastodonfeeds_url" name="shortcodemastodonfeeds_url" value="' . sanitize_url($value) . '" pattern="'. esc_attr($pattern) 
     .'" title="Mastodon profile URL must be in the form of https://domain.tld/@user" placeholder="https://mastodon.social/@user" style="width:30em;"/>';
 }
 
@@ -54,6 +55,17 @@ function shortcodemastodonfeeds_settings_count() {
     .'" title="Mastodon profile URL must be in the form of https://domain.tld/@user" placeholder="https://mastodon.social/@user" style="width:30em;"/>';
 }
 
+// Add link to Settings on Plugin page
+function shortcodemastodonfeeds_plugin_page() {
+  $plugin_file = basename( plugin_dir_path( __FILE__ ) ) . 'shortcode-mastodon-feeds.php';
+
+  function shortcodemastodonfeeds_settings_link( $plugin_actions, $plugin_file ) {
+    $new_actions = array();
+    $new_actions['shortcodemastodonfeeds_settings'] = sprintf( __( '<a href="%s">Settings</a>', 'shortcodemastodonfeeds_url' ), esc_url( admin_url( 'options-general.php#shortcodemastodonfeeds' ) ) );
+    return array_merge( $new_actions, $plugin_actions );
+  }
+  add_filter( 'plugin_action_links', 'shortcodemastodonfeeds_settings_link', 'shortcode-mastodon-feeds.php', 2 );
+}
 
 function shortcodemastodonfeeds_get_posts() {
   // Define the RSS feed
