@@ -3,7 +3,7 @@
  * Plugin Name: Shortcode Mastodon Feeds
  * Plugin URI: 
  * Description: Display your Mastodon posts on a WordPress page
- * Version: 0.0.0
+ * Version: 1.0.1
  * Author: Andrew Leahey, Jay McKinnon
  * Author URI: https://github.com/ajleahey/shortcode-mastodon-feeds
  * License: GPL-2.0+

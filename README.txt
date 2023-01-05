@@ -1,10 +1,10 @@
 === Shortcode Mastodon Feeds ===
-Contributors: ajleahey, opendna
+Contributors: aleahey, opendna
 Tags: Mastodon, shortcode
 Requires at least: 6.1
 Tested up to: 6.1.1
 Requires PHP: 7.4
-Stable tag: 0.0.0
+Stable tag: 1.0.1
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -19,4 +19,11 @@ Install from the Plugin store and Activate. Then look of two options added to th
 == Changelog ==
 Project maintained on GitHub at https://github.com/ajleahey/shortcode-mastodon-feeds
 
-= Pre-release =
+= 1.0.1 =
+
+* fixes error when no URL is defined in Settings
+* adds Settings link to plugin page when activated
+
+= 1.0.0 =
+
+* initial Wordpress.org commit

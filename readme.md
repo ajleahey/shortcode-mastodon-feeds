@@ -5,7 +5,7 @@
 **Requires at least:** 6.1  
 **Tested up to:** 6.1.1  
 **Requires PHP:** 7.4  
-**Stable tag:** 0.0.0  
+**Stable tag:** 1.0.1  
 **License:** GPL-2.0+  
 **License URI:** [gnu.org/licenses/gpl-2.0.txt](http://www.gnu.org/licenses/gpl-2.0.txt)  
 
@@ -19,12 +19,15 @@ Upload to your Plugins directory and Activate. Two options will be added to the 
 
 Use short-code `[shortcode-mastodon-feeds]` to insert the feed anywhere in your site.
 
-## Warning ##
-
-This is a pre-release version of the plugin. There *will* be breaking changes in Version 1.0.0. Use Github's Watch > Custom menu to be notified of stable releases.
-
 ## Changelog ##
 
 Project maintained on GitHub at [github.com/ajleahey/shortcode-mastodon-feeds](https://github.com/ajleahey/shortcode-mastodon-feeds)
 
-### Pre-release ###
+### 1.0.1 ###
+
+* fixes error when no URL is defined in Settings
+* adds Settings link to plugin page when activated
+
+### 1.0.0 ###
+
+* initial Wordpress.org commit
