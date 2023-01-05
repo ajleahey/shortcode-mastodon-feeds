@@ -69,23 +69,23 @@ function shortcodemastodonfeeds_plugin_page() {
 
 function shortcodemastodonfeeds_get_posts() {
   // Define the RSS feed
-  if ( ! empty( 'smverification_site_url' ) ) {
+  if ( get_option( 'shortcodemastodonfeeds_url' ) && ! empty( 'shortcodemastodonfeeds_url' ) ) {
     $url = get_option( 'shortcodemastodonfeeds_url','' );
     $extension = '.rss';
     $rss = $url . $extension;
     $rss = preg_replace( "/.rss.rss/", ".rss", $rss );
   } else {
-    $rss = wp_rss( 'https://esq.social/@andrew' );
+    $rss = 'https://esq.social/@andrew.rss';
   }
 
   // get the user-defined number of posts, defaults to 10.
-  if ( ! empty( 'shortcodemastodonfeeds_count' ) ) {
+  if ( get_option( 'shortcodemastodonfeeds_count' ) && ! empty( 'shortcodemastodonfeeds_count' ) ) {
     $count = get_option( 'shortcodemastodonfeeds_count','' );
     if ($count > 0) {
       $count = $count;
     }
   } else {
-    $count = '10';
+    $count = 10;
   }
 
   // wp_kses() uses $allowedtags to sanitize values The Wordpress Way.
