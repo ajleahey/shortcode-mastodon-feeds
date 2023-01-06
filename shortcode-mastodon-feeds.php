@@ -3,7 +3,7 @@
  * Plugin Name: Shortcode Mastodon Feeds
  * Plugin URI: 
  * Description: Display your Mastodon posts on a WordPress page
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: Andrew Leahey, Jay McKinnon
  * Author URI: https://github.com/ajleahey/shortcode-mastodon-feeds
  * License: GPL-2.0+
@@ -28,7 +28,7 @@ if ( ! function_exists( 'shortcodemastodonfeeds_init' ) ||
       add_settings_field('shortcodemastodonfeeds_count', '<label for="shortcodemastodonfeeds_count">'.__('How many posts displayed by Shortcode Mastodon Feeds' , 'shortcodemastodonfeeds_count' ).'</label>' , 'shortcodemastodonfeeds_settings_count', 'general');
   }
   add_filter('admin_init', 'shortcodemastodonfeeds_init');
-  shortcodemastodonfeeds_plugin_page();
+  //shortcodemastodonfeeds_plugin_page();
 
   // Exits name collision is found.
 } else {
@@ -56,16 +56,20 @@ function shortcodemastodonfeeds_settings_count() {
 }
 
 // Add link to Settings on Plugin page
-function shortcodemastodonfeeds_plugin_page() {
-  $plugin_file = basename( plugin_dir_path( __FILE__ ) ) . 'shortcode-mastodon-feeds.php';
-
-  function shortcodemastodonfeeds_settings_link( $plugin_actions, $plugin_file ) {
-    $new_actions = array();
-    $new_actions['shortcodemastodonfeeds_settings'] = sprintf( __( '<a href="%s">Settings</a>', 'shortcodemastodonfeeds_url' ), esc_url( admin_url( 'options-general.php#shortcodemastodonfeeds' ) ) );
-    return array_merge( $new_actions, $plugin_actions );
-  }
-  add_filter( 'plugin_action_links', 'shortcodemastodonfeeds_settings_link', 'shortcode-mastodon-feeds.php', 2 );
-}
+/* Feature removed pending testing
+ *
+ * function shortcodemastodonfeeds_plugin_page() {
+ *   $plugin_file = basename( plugin_dir_path( __FILE__ ) ) . 'shortcode-mastodon-feeds.php';
+ * 
+ *   function shortcodemastodonfeeds_settings_link( $plugin_actions, $plugin_file ) {
+ *     $new_actions = array();
+ *     $new_actions['shortcodemastodonfeeds_settings'] = sprintf( __( '<a href="%s">Settings</a>', 'shortcodemastodonfeeds_url' ), esc_url( admin_url( 'options-general.php#shortcodemastodonfeeds' ) ) );
+ *     return array_merge( $new_actions, $plugin_actions );
+ *   }
+ *   add_filter( 'plugin_action_links', 'shortcodemastodonfeeds_settings_link', 'shortcode-mastodon-feeds.php', 2 );
+ * }
+ * 
+ */
 
 function shortcodemastodonfeeds_get_posts() {
   // Define the RSS feed
