@@ -4,7 +4,7 @@ Tags: Mastodon, shortcode
 Requires at least: 6.1
 Tested up to: 6.1.1
 Requires PHP: 7.4
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -18,6 +18,10 @@ Install from the Plugin store and Activate. Then look of two options added to th
 
 == Changelog ==
 Project maintained on GitHub at https://github.com/ajleahey/shortcode-mastodon-feeds
+
+= 1.0.2 =
+
+* deactivates "Settings" link Plugin page pending further testing
 
 = 1.0.1 =
 

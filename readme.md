@@ -5,7 +5,7 @@
 **Requires at least:** 6.1  
 **Tested up to:** 6.1.1  
 **Requires PHP:** 7.4  
-**Stable tag:** 1.0.1  
+**Stable tag:** 1.0.2  
 **License:** GPL-2.0+  
 **License URI:** [gnu.org/licenses/gpl-2.0.txt](http://www.gnu.org/licenses/gpl-2.0.txt)  
 
@@ -22,6 +22,10 @@ Use short-code `[shortcode-mastodon-feeds]` to insert the feed anywhere in your 
 ## Changelog ##
 
 Project maintained on GitHub at [github.com/ajleahey/shortcode-mastodon-feeds](https://github.com/ajleahey/shortcode-mastodon-feeds)
+
+### 1.0.2 ###
+
+* deactivates "Settings" link Plugin page pending further testing
 
 ### 1.0.1 ###
 
